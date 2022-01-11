@@ -34,7 +34,7 @@ class UserModel extends CI_Model
             'phoneNumber' => $this->input->post('phoneNumber'),
         );
 
-         $this->vardump($data);
+        //  $this->vardump($data);
 
         $data_string = json_encode($data);
 
