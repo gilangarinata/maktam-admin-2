@@ -157,7 +157,7 @@
 
 
 
-                window.onload = function() {
+
                     $('#data_1 .input-group.date').datepicker({
                             todayBtn: "linked",
                             keyboardNavigation: false,
@@ -172,7 +172,7 @@
                         })
                         .datepicker("setDate", new Date());
 
-                };
+
 
 
 
