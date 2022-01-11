@@ -1,10 +1,10 @@
 <?php
 
-class OutletModel extends CI_Model
+class UserModel extends CI_Model
 {
-    function getAllOutlets()
+    function getAllUsers()
     {
-        $curl = curl_init('http://api.susumaktam.com/api/v1/admin/master-data/outlet');
+        $curl = curl_init('http://api.susumaktam.com/api/v1/admin/master-data/users');
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt(
             $curl,
@@ -19,19 +19,26 @@ class OutletModel extends CI_Model
         curl_close($curl);
 
         // $this->vardump($result);
-        return $result->items;
+        return $result;
     }
 
-    function addOutlet()
+    function addUser()
     {
         $data = array(
-            'name'      => $this->input->post('name'),
+            'username'      => $this->input->post('username'),
+            'password' => $this->input->post('password'),
+            'outletId' => (int) $this->input->post('outlet'),
+            'roleId' => 2,
+            'name' => $this->input->post('fullname'),
             'address' => $this->input->post('address'),
+            'phoneNumber' => $this->input->post('phoneNumber'),
         );
+
+        //  $this->vardump($data);
 
         $data_string = json_encode($data);
 
-        $curl = curl_init('http://api.susumaktam.com/api/v1/admin/master-data/outlet');
+        $curl = curl_init('http://api.susumaktam.com/api/v1/admin/master-data/users');
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt(
             $curl,
@@ -51,7 +58,7 @@ class OutletModel extends CI_Model
         return $result->items;
     }
 
-    function deleteOutlet($id)
+    function deleteUser($id)
     {
         $data = array(
             'name'      => $this->input->post('name'),
@@ -60,7 +67,7 @@ class OutletModel extends CI_Model
 
         $data_string = json_encode($data);
 
-        $curl = curl_init('http://api.susumaktam.com/api/v1/admin/master-data/outlet?id=' . $id);
+        $curl = curl_init('http://api.susumaktam.com/api/v1/admin/master-data/users?id=' . $id);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
         curl_setopt(
             $curl,

@@ -1,10 +1,10 @@
 <?php
 
-class OutletModel extends CI_Model
+class DashboardModel extends CI_Model
 {
-    function getAllOutlets()
+    function getOverview($date)
     {
-        $curl = curl_init('http://api.susumaktam.com/api/v1/admin/master-data/outlet');
+        $curl = curl_init('http://api.susumaktam.com/api/v1/admin/dashboard/summary?date=' . $date);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt(
             $curl,
@@ -18,66 +18,62 @@ class OutletModel extends CI_Model
         $result = json_decode(curl_exec($curl));
         curl_close($curl);
 
-        // $this->vardump($result);
-        return $result->items;
+        // $this->vardump($date);
+        return $result;
     }
 
-    function addOutlet()
-    {
-        $data = array(
-            'name'      => $this->input->post('name'),
-            'address' => $this->input->post('address'),
-        );
-
-        $data_string = json_encode($data);
-
-        $curl = curl_init('http://api.susumaktam.com/api/v1/admin/master-data/outlet');
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+    function getSellingData($date){
+        $curl = curl_init('http://api.susumaktam.com/api/v1/admin/dashboard/selling?date=' . $date);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt(
             $curl,
             CURLOPT_HTTPHEADER,
             array(
                 'Content-Type: application/json',
-                'Content-Length: ' . strlen($data_string),
                 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkuc3VzdW1ha3RhbS5jb21cL2xvZ2luIiwiaWF0IjoxNjQxMDE3Mjk3LCJleHAiOjQ4MDgxNzYwNDYwMzY3NDIwOTcsIm5iZiI6MTY0MTAxNzI5NywianRpIjoiVXUzVVhHQzl1UUNSTWk4SyIsInN1YiI6NiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.CNDZ07rQjfWFw_194heCsZPuO50FE6IpE8IwjQoSgSo'
             )
         );
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
-        $result = json_decode(curl_exec($curl));
+        $sellings = json_decode(curl_exec($curl))->items;
         curl_close($curl);
 
-        // $this->vardump($result);
-        return $result->items;
+        $products = $this->getProducts();
+        foreach ($products as $product) {
+            $sellingData = NULL;
+            foreach($sellings as $selling){
+                if($selling->itemId == $product->id){
+                    $sellingData = $selling;
+                }
+            }
+            if($sellingData != NULL){
+                $product->sold = $sellingData->sold;
+            }else{
+                $product->sold = 0;
+            }
+        }
+
+        // $this->vardump($products);
+        return $products;
     }
 
-    function deleteOutlet($id)
+    function getProducts()
     {
-        $data = array(
-            'name'      => $this->input->post('name'),
-            'address' => $this->input->post('address'),
-        );
-
-        $data_string = json_encode($data);
-
-        $curl = curl_init('http://api.susumaktam.com/api/v1/admin/master-data/outlet?id=' . $id);
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+        $curl = curl_init('http://api.susumaktam.com/api/v1/admin/master-data/items');
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt(
             $curl,
             CURLOPT_HTTPHEADER,
             array(
                 'Content-Type: application/json',
-                'Content-Length: ' . strlen($data_string),
                 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkuc3VzdW1ha3RhbS5jb21cL2xvZ2luIiwiaWF0IjoxNjQxMDE3Mjk3LCJleHAiOjQ4MDgxNzYwNDYwMzY3NDIwOTcsIm5iZiI6MTY0MTAxNzI5NywianRpIjoiVXUzVVhHQzl1UUNSTWk4SyIsInN1YiI6NiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.CNDZ07rQjfWFw_194heCsZPuO50FE6IpE8IwjQoSgSo'
             )
         );
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
         $result = json_decode(curl_exec($curl));
         curl_close($curl);
+        // $this->vardump($result); 
 
-        // $this->vardump($result);
-        return $result->items;
+        return array_filter($result->items, function ($res){ return $res->type == 'item'; });
     }
 
     function vardump($var)
@@ -87,4 +83,6 @@ class OutletModel extends CI_Model
         echo "</pre>";
         die;
     }
+
+
 }

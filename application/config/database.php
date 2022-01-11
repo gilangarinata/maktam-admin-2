@@ -76,15 +76,15 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	
-	// 'hostname' => 'localhost',
-	// 'username' => 'root',
-	// 'password' => '',
-	// 'database' => 'kasir_maktam',
-
 	'hostname' => 'localhost',
-	'username' => 'u151422786_kasir',
-	'password' => 'kuning77',
-	'database' => 'u151422786_kasir',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'maktampos',
+
+	// 'hostname' => 'localhost',
+	// 'username' => 'u151422786_kasir',
+	// 'password' => 'kuning77',
+	// 'database' => 'u151422786_kasir',
 
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

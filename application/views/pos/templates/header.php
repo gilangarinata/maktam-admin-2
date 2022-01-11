@@ -9,6 +9,8 @@
 
     <title>KASIR MAKTAM | Dashboard</title>
 
+    <link href="<?= base_url() ?>css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+
     <link href="<?= base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 
