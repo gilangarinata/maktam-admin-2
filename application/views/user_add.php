@@ -72,6 +72,15 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <div class="form-group"><label class="col-lg-2 control-label">Posisi</label>
+                                                    <div class="col-lg-10">
+                                                        <select name="role" class="form-control m-b" name="account">
+                                                        <option value="1">Admin</option>
+                                                        <option value="2">Karyawan</option>
+                                                        <option value="3">Gudang</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 <div class="form-group">
                                                     <div class="col-lg-offset-2 col-lg-10">
                                                         <button name="submit" class="btn btn-sm btn-primary" type="submit">Simpan</button>

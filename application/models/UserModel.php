@@ -28,7 +28,7 @@ class UserModel extends CI_Model
             'username'      => $this->input->post('username'),
             'password' => $this->input->post('password'),
             'outletId' => (int) $this->input->post('outlet'),
-            'roleId' => 2,
+            'roleId' => $this->input->post('role'),
             'name' => $this->input->post('fullname'),
             'address' => $this->input->post('address'),
             'phoneNumber' => $this->input->post('phoneNumber'),

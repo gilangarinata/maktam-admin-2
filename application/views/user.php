@@ -47,6 +47,7 @@
                                                 <tr>
                                                     <th>Nama Pengguna</th>
                                                     <th>Outlet</th>
+                                                    <th>Posisi</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -56,6 +57,7 @@
                                                     <tr class="gradeX">
                                                         <td><?= $user->username ?></td>
                                                         <td><?= $user->outletName ?></td>
+                                                        <td><?= $user->roleId == 1 ? "Admin" :  ($user->roleId == 2 ? "Karyawan" : ($user->roleId == 3 ? "Gudang" : "")) ?></td>
                                                         <td><button onclick="location.href = '<?= base_url() ?>user/delete/<?= $user->id ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
                                                     </tr>
                                                 <?php endforeach; ?>
