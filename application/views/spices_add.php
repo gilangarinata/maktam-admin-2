@@ -47,6 +47,7 @@
                                                 <div class="form-group"><label class="col-lg-2 control-label">Nama Bumbu</label>
                                                     <div class="col-lg-10"><input name="name" type="text" class="form-control"> 
                                                     </div>
+                                                    
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-lg-offset-2 col-lg-10">
