@@ -45,5 +45,16 @@ class Material extends CI_Controller{
         redirect('material');
     }
 
+    public function edit()
+    {   
+        $data['materialId'] = $this->input->get('materialId');
+        $data['materialName'] = $this->input->get('materialName'); 
+        $this->load->view("admin/templates/header");
+        $this->load->view("material_add",$data);
 
+        if(isset($_POST['submit'])){
+            $this->model->editMaterial($this->input->get('materialId'));
+            redirect('material');
+        }
+    }
 }

@@ -104,7 +104,8 @@
                                                 foreach ($materials as $material) : ?>
                                                     <tr class="gradeX">
                                                         <td><?= $material->name ?></td>
-                                                        <td><button onclick="location.href = '<?= base_url() ?>user/delete/<?= $material->id ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
+                                                        <td><button onclick="location.href = '<?= base_url() ?>material/delete/<?= $material->id ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                                        <button onclick="location.href = '<?= base_url() ?>material/edit?materialId=<?= $material->id ?>&materialName=<?= $material->name ?>';" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button></td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>

@@ -45,7 +45,7 @@
                                         <div class="ibox-content">
                                             <form method="post" class="form-horizontal">
                                                 <div class="form-group"><label class="col-lg-2 control-label">Nama Material</label>
-                                                    <div class="col-lg-10"><input name="name" type="text" class="form-control">
+                                                    <div class="col-lg-10"><input name="name" value="<?= $materialName; ?>" type="text" class="form-control">
                                                     </div>
                                                 </div>
 
