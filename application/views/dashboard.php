@@ -145,7 +145,7 @@
 
         <script>
             function downloadFileOverview() {
-                var url = "http://generate-pdf.susumaktam.com/generate-summary?date=<?= $overview->date; ?>";
+                var url = "<?= $overview->urlExcel; ?>";
                 window.location.href = url;
             };
 

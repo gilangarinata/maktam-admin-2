@@ -57,7 +57,8 @@
                                                     <td><?= $product->name ?></td>
                                                     <td><?= toRupiah($product->price) ?></td>
                                                     <td><?= $product->subcategoryName ?></td>
-                                                    <td><button onclick="location.href = '<?= base_url() ?>product/delete/<?= $product->id ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
+                                                    <td><button onclick="location.href = '<?= base_url() ?>product/delete/<?= $product->id ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                                    <button onclick="location.href = '<?= base_url() ?>product/edit?productId=<?= $product->id ?>';" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>

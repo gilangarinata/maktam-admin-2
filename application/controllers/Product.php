@@ -5,6 +5,7 @@ class Product extends CI_Controller{
     {
         parent::__construct();
         $this->load->model('ProductModel', 'model');
+        $this->load->model('OutletModel', 'outletModel');
         $this->load->library('upload');
         $this->load->library('session');
     }
@@ -54,5 +55,21 @@ class Product extends CI_Controller{
         redirect('product');
     }
 
+    public function edit()
+    {   
+        $productId = $this->input->get('productId');
+        $products = $this->model->getAllProducts();
+        $productById = array_filter($products, function ($res) use ($productId){ return $res->id == $productId; });
+        $data['subcategories'] = $this->model->getAllSubcategories();
+        $data['item'] = $productById;
+        $data['productId'] = $productId;
+        $this->load->view("admin/templates/header",$data);
+        $this->load->view("product_add");
+
+        if(isset($_POST['submit'])){
+            $this->model->editProduct($productId);
+            redirect('product');
+        }
+    }
 
 }

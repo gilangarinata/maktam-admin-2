@@ -25,12 +25,11 @@
             </div>
 
             <div class="wrapper wrapper-content animated fadeInRight">
-
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>Tambah Produk</h5>
+                                <h5>Standard Susu</h5>
                                 <div class="ibox-tools">
                                     <a class="collapse-link">
                                         <i class="fa fa-chevron-up"></i>
@@ -40,54 +39,34 @@
                             </div>
                             <div class="ibox-content">
 
-                                <?php
-                                $name = "";
-                                $price = "";
-                                $subcategoryId = -1;
-                                if(isset($item)){
-                                    if (sizeof($item) > 0) {
-                                        $name = current($item)->name;
-                                        $price = current($item)->price;
-                                        $subcategoryId = current($item)->subcategoryId;
-                                    }
-                                }
-                                ?>
-                                <div class="ibox float-e-margins">
-                                    <div class="ibox-content">
-                                        <form method="post" class="form-horizontal">
-                                            <div class="form-group"><label class="col-lg-2 control-label">Nama</label>
-                                                <div class="col-lg-10"><input value="<?= $name ?>" name="name" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-lg-2 control-label">Harga</label>
-                                                <div class="col-lg-10"><input value="<?= $price ?>" name="price" type="number" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-lg-2 control-label">Category</label>
-                                                <div class="col-lg-10">
-                                                    <select name="subCategoryId" class="form-control m-b" name="account">
-                                                        <?php $i = 0;
-                                                        foreach ($subcategories as $subcategory) : ?>
-                                                            <option <?= $subcategoryId == $subcategory->id ? 'selected' : '' ?> value="<?= $subcategory->id ?>"><?= $subcategory->categoryName ?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-lg-offset-2 col-lg-10">
-                                                    <button name="submit" class="btn btn-sm btn-primary" type="submit">Simpan</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama</th>
+                                                <th>Standard</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $i = 0;
+                                            foreach ($products as $product) : ?>
+                                                <tr class="gradeX">
+                                                    <td><?= "" ?></td>
+                                                    <td><?= "" ?></td>
+                                                    <td><button onclick="location.href = '<?= base_url() ?>product/deleteas/<?= $product->id ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                                    <button onclick="location.href = '<?= base_url() ?>product/ediat?productIdss=<?= $product->id ?>';" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+
+                                    </table>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
                 </div>
-
 
             </div>
 
@@ -173,18 +152,10 @@
 
         </html>
 
-
-
         <?php
         function toRupiah($value)
         {
             return "Rp." . number_format($value, 0, ".", ".");
         }
-        function vardump($var)
-        {
-            echo "<pre>";
-            var_dump($var);
-            echo "</pre>";
-            die;
-        }
         ?>
+

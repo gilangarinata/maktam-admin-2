@@ -50,6 +50,7 @@
                             <li><a href="<?= base_url() ?>inventory">Gudang</a></li>
                             <li><a href="<?= base_url() ?>product">Produk</a></li>
                             <li><a href="<?= base_url() ?>user">Pengguna</a></li>
+                            <li><a href="<?= base_url() ?>standard">Standard</a></li>
                             <li><a href="<?= base_url() ?>outlet">Outlet</a></li>
                         </ul>
                     </li>
