@@ -66,15 +66,15 @@ class Stock extends CI_Controller{
     }
 
 
-    public function delete_cup($name)
+    public function delete_cup($id)
     {   
-        $this->model->deleteItem($name);
+        $this->model->deleteItemById($id);
         redirect('stock');
     }
 
-    public function delete_spices($name)
+    public function delete_spices($id)
     {   
-        $this->model->deleteItem($name);
+        $this->model->deleteItemById($id);
         redirect('stock');
     }
 

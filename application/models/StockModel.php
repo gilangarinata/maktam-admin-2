@@ -187,6 +187,24 @@ class StockModel extends CI_Model
         return NULL;
     }
 
+    function deleteItemById($id)
+    {
+        $curl = curl_init('http://api.susumaktam.com/api/v1/admin/master-data/items?id=' . $id);
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+                curl_setopt(
+                    $curl,
+                    CURLOPT_HTTPHEADER,
+                    array(
+                        'Content-Type: application/json',
+                        'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkuc3VzdW1ha3RhbS5jb21cL2xvZ2luIiwiaWF0IjoxNjQxMDE3Mjk3LCJleHAiOjQ4MDgxNzYwNDYwMzY3NDIwOTcsIm5iZiI6MTY0MTAxNzI5NywianRpIjoiVXUzVVhHQzl1UUNSTWk4SyIsInN1YiI6NiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.CNDZ07rQjfWFw_194heCsZPuO50FE6IpE8IwjQoSgSo'
+                    )
+                );
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                $result = json_decode(curl_exec($curl));
+                curl_close($curl);
+        return NULL;
+    }
+
     function getAllProducts()
     {
         $curl = curl_init('http://api.susumaktam.com/api/v1/admin/master-data/items');
