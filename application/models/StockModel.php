@@ -162,7 +162,7 @@ class StockModel extends CI_Model
 
     function deleteItem($name)
     {
-        vardump($name);die;
+        var_dump($name);die;
         $products = $this->getAllProducts();
         foreach ($products as $product) {
             if ($product->name == $name) {
