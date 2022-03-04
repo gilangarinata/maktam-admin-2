@@ -195,7 +195,7 @@
                                             foreach ($stockData[1]->items as $cup) : ?>
                                                 <tr>
                                                     <td><?= $cup->itemName; ?></td>
-                                                    <td><button onclick="location.href = '<?= base_url() ?>stock/delete_cup/<?= $cup->id ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
+                                                    <td><button onclick="location.href = '<?= base_url() ?>stock/delete_cup/<?= $cup->itemId ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -236,7 +236,7 @@
                                             foreach ($stockData[2]->items as $bumbu) : ?>
                                                 <tr>
                                                     <td><?= $bumbu->itemName; ?></td>
-                                                    <td><button onclick="location.href = '<?= base_url() ?>stock/delete_spices/<?= $bumbu->id ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
+                                                    <td><button onclick="location.href = '<?= base_url() ?>stock/delete_spices/<?= $bumbu->itemId ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
