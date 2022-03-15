@@ -2,6 +2,27 @@
 
 class InventoryModel extends CI_Model
 {
+    function getInventoryExpense($date){
+        $datas = array(
+            'date'=>$date
+        );
+        return $this->db->get_where('inventory_expense',$datas)->result_array();
+    }
+
+    function insertInventoryExpense($date,$name,$total){
+        $data2 = array(
+            'name' => $name,
+            'total' => $total,
+            'date' => $date
+        );
+        $this->db->insert("inventory_expense",$data2);
+    }
+
+    function deleteInventoryExpense($id){
+        $this->db->where('id', $id);
+        return $this->db->delete('inventory_expense');
+    }
+
     function getInventories($date)
     {
         $curl = curl_init('http://api.susumaktam.com/api/v1/admin/dashboard/inventory?date=' . $date);

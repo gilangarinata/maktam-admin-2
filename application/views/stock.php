@@ -110,6 +110,28 @@
                                                     <td><?= $spice->left; ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
+
+                                            <?php
+
+                                            $totalStockSpices = array_reduce($stockData[2]->items, function ($carry, $item) {
+                                                return $carry + $item->stock;
+                                            });
+
+                                            $totalSoldSpices = array_reduce($stockData[2]->items, function ($carry, $item) {
+                                                return $carry + $item->sold;
+                                            });
+
+                                            $totalLeftSpices = array_reduce($stockData[2]->items, function ($carry, $item) {
+                                                return $carry + $item->left;
+                                            });
+
+                                            ?>
+                                            <tr>
+                                                <td>Total</td>
+                                                <td><?= $totalStockSpices ?></td>
+                                                <td><?= $totalSoldSpices ?></td>
+                                                <td><?= $totalLeftSpices ?></td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -157,6 +179,28 @@
                                                     <td><?= $cup->left; ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
+
+                                            <?php
+
+                                            $totalStockCup = array_reduce($stockData[1]->items, function ($carry, $item) {
+                                                return $carry + $item->stock;
+                                            });
+
+                                            $totalSoldCup = array_reduce($stockData[1]->items, function ($carry, $item) {
+                                                return $carry + $item->sold;
+                                            });
+
+                                            $totalLeftCup = array_reduce($stockData[1]->items, function ($carry, $item) {
+                                                return $carry + $item->left;
+                                            });
+
+                                            ?>
+                                            <tr>
+                                                <td>Total</td>
+                                                <td><?= $totalStockCup ?></td>
+                                                <td><?= $totalSoldCup ?></td>
+                                                <td><?= $totalLeftCup ?></td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -327,19 +371,19 @@
 
 
 
-                    $('#data_1 .input-group.date').datepicker({
-                            todayBtn: "linked",
-                            keyboardNavigation: false,
-                            forceParse: false,
-                            calendarWeeks: true,
-                            autoclose: true,
-                            dateFormat: "dd-mm-yyyy",
+                $('#data_1 .input-group.date').datepicker({
+                        todayBtn: "linked",
+                        keyboardNavigation: false,
+                        forceParse: false,
+                        calendarWeeks: true,
+                        autoclose: true,
+                        dateFormat: "dd-mm-yyyy",
 
-                        })
-                        .on("changeDate", function(e) {
+                    })
+                    .on("changeDate", function(e) {
 
-                        })
-                        .datepicker("setDate", new Date());
+                    })
+                    .datepicker("setDate", new Date());
 
 
 

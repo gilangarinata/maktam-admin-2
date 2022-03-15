@@ -82,6 +82,43 @@
 
                             </div>
                         </div>
+
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Pengeluaran Gudang</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+
+                                <table class="table">
+                                    <tbody>
+                                        <?php $i = 0;
+                                            foreach ($inventory_expense as $inv) : 
+                                                $id = $inv["id"];
+                                            ?>
+                                                <tr class="gradeX">
+                                                    <td><?= $inv["name"] ?></td>
+                                                    <td><?= $inv["total"] ?></td>
+                                                    <td><button onclick="location.href = '<?= base_url() ?>dashboard/delete_inventory?id=<?= $id ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <tr>
+                                            <td><input id="keterangan" id="date" placeholder="Keterangan" type="text" class="form-control" value=""></td>
+                                            <td><input id="total" id="date" placeholder="Jumlah" type="text" class="form-control" value=""></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <button onclick="inventorySaveButton('<?= $overview->date ?>');"  class="btn btn-sm btn-primary">Simpan</button>
+
+                            </div>
+                        </div>
+                        
                     </div>
                     <div class="col-lg-6">
                         <div class="ibox float-e-margins">
@@ -144,6 +181,16 @@
         <script src="<?= base_url() ?>assets/js/plugins/dataTables/datatables.min.js"></script>
 
         <script>
+
+            function inventorySaveButton(tanggal){
+                var name = $('#keterangan').val();
+                var total = $('#total').val();
+
+                if(name){
+                    window.location = '<?= base_url() ?>dashboard/add_inventory?date=' + tanggal + '&name='+ name + '&total=' + total;
+                }
+            }
+
             function downloadFileOverview() {
                 var url = "<?= $overview->urlExcel; ?>";
                 window.location.href = url;
