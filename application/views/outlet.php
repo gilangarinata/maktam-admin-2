@@ -41,29 +41,30 @@
                             <div class="ibox-content">
 
 
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-bordered table-hover dataTables-example">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nama Outlet</th>
-                                                    <th>Alamat</th>
-                                                    <th></th>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Outlet</th>
+                                                <th>Alamat</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $i = 0;
+                                            foreach ($outlets as $outlet) : ?>
+                                                <tr class="gradeX">
+                                                    <td><?= $outlet->name ?></td>
+                                                    <td><?= $outlet->address ?></td>
+                                                    <td><button onclick="location.href = '<?= base_url() ?>outlet/delete/<?= $outlet->id ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
+                                                    <td><button onclick="goToOutlet(<?= $outlet->name ?>);" class="btn btn-sm btn-primary">Ke Outlet</button></td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php $i = 0;
-                                                foreach ($outlets as $outlet) : ?>
-                                                    <tr class="gradeX">
-                                                        <td><?= $outlet->name ?></td>
-                                                        <td><?= $outlet->address ?></td>
-                                                        <td><button onclick="location.href = '<?= base_url() ?>outlet/delete/<?= $outlet->id ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
+                                            <?php endforeach; ?>
+                                        </tbody>
 
-                                        </table>
-                                    </div>
-                                    <button onclick="location.href = '<?= base_url() ?>outlet/add';"  class="btn btn-sm btn-primary"> Tambah Outlet</button>
+                                    </table>
+                                </div>
+                                <button onclick="location.href = '<?= base_url() ?>outlet/add';" class="btn btn-sm btn-primary"> Tambah Outlet</button>
 
 
                             </div>
@@ -93,6 +94,11 @@
         <script src="<?= base_url() ?>assets/js/plugins/dataTables/datatables.min.js"></script>
 
         <script>
+            function goToOutlet(outletName) {
+                console.log('goToOutlet:'+outletName);
+            }
+
+
             $(document).ready(function() {
                 $('.dataTables-example').DataTable({
                     pageLength: 5,
