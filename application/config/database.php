@@ -79,7 +79,7 @@ $db['default'] = array(
 	// 'hostname' => 'localhost',
 	// 'username' => 'root',
 	// 'password' => '',
-	// 'database' => 'maktampos',
+	// 'database' => 'test',
 
 	'hostname' => 'localhost',
 	'username' => 'u151422786_root',
