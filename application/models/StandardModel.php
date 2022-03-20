@@ -66,7 +66,7 @@ class StandardModel extends CI_Model
         $outlets = json_decode(curl_exec($curl))->items;
         curl_close($curl);
 
-        $itemMilk = 4;
+        $itemMilk = 25;
         //get standard
         $curl = curl_init('http://api.susumaktam.com/api/v1/admin/master-data/standard?itemId=' . $itemMilk);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
