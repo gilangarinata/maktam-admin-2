@@ -49,6 +49,11 @@
                                     </a>
                                 </div>
                             </div>
+                            <?php
+                                $totalInventoryExpense = array_reduce($inventory_expense, function ($carry, $item) {
+                                    return $carry + $item["total"];
+                                });
+                            ?>
                             <div class="ibox-content">
 
                                 <table class="table">
@@ -75,7 +80,7 @@
                                         </tr>
                                         <tr>
                                             <td>Omset</td>
-                                            <td><?= toRupiah($overview->totalFund + $overview->totalIncome - $overview->totalExpense) ?></td>
+                                            <td><?= toRupiah(($overview->totalFund + $overview->totalIncome - $overview->totalExpense) - $totalInventoryExpense) ?></td>
                                         </tr>
                                     </tbody>
                                 </table>
