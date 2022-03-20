@@ -25,12 +25,11 @@
             </div>
 
             <div class="wrapper wrapper-content animated fadeInRight">
-
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <h5>Tambah Material</h5>
+                                <h5>Standard Material</h5>
                                 <div class="ibox-tools">
                                     <a class="collapse-link">
                                         <i class="fa fa-chevron-up"></i>
@@ -39,31 +38,30 @@
                                 </div>
                             </div>
                             <div class="ibox-content">
-                                    <?php
-                                        $materialNm = "";
-                                        if(isset($materialName)){
-                                            $materialNm = $materialName;
-                                        }
-                                    ?>
-
-                                    <div class="ibox float-e-margins">
-                                        <div class="ibox-content">
-                                            <form method="post" class="form-horizontal">
-                                                <div class="form-group"><label class="col-lg-2 control-label">Nama Material</label>
-                                                    <div class="col-lg-10"><input name="name" value="<?= $materialNm ?>" type="text" class="form-control">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-lg-offset-2 col-lg-10">
-                                                        <button name="submit" class="btn btn-sm btn-primary" type="submit">Simpan</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
 
 
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama</th>
+                                                <th>Standard</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $i = 0;
+                                            foreach ($standardMaterials as $standardMaterial) : ?>
+                                                <tr class="gradeX">
+                                                    <td><?= $standardMaterial->name ?></td>
+                                                    <td><input id="standard<?= $standardMaterial->id ?>" id="date" type="text" class="form-control" value="<?= $standardMaterial->standard ?>"></td>
+                                                    <td><button onclick="standardSaveButton(<?= $standardMaterial->id ?>,<?= $standardMaterial->materialId ?>);" class="btn btn-sm btn-primary">Simpan</button></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -91,11 +89,14 @@
         <script src="<?= base_url() ?>assets/js/plugins/dataTables/datatables.min.js"></script>
 
         <script>
-            function downloadFileOverview() {
-                var date = "<?= $overview->date; ?>";
-                console.log(date);
-                window.location.href = 'http://api.susumaktam.com/generate-summary?date=' + date;
-            };
+            function standardSaveButton(outletId, itemId) {
+                var id = '#standard' + outletId;
+                var standard = $(id).val();
+
+                if (standard) {
+                    window.location = '<?= base_url() ?>standard/add_material?outletId=' + outletId + '&itemId=' + itemId + '&value=' + standard;
+                }
+            }
 
 
             $(document).ready(function() {

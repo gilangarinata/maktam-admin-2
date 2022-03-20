@@ -54,7 +54,7 @@ class UserModel extends CI_Model
         $result = json_decode(curl_exec($curl));
         curl_close($curl);
 
-        // $this->vardump($result);
+        // $this->vardump($result);die;
         return $result->items;
     }
 

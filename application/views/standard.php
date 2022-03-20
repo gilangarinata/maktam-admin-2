@@ -51,12 +51,46 @@
                                         </thead>
                                         <tbody>
                                             <?php $i = 0;
-                                            foreach ($products as $product) : ?>
+                                            foreach ($standardMilks as $standardMilk) : ?>
                                                 <tr class="gradeX">
-                                                    <td><?= "" ?></td>
-                                                    <td><?= "" ?></td>
-                                                    <td><button onclick="location.href = '<?= base_url() ?>product/deleteas/<?= $product->id ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                                                    <button onclick="location.href = '<?= base_url() ?>product/ediat?productIdss=<?= $product->id ?>';" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></button></td>
+                                                    <td><?= $standardMilk->name ?></td>
+                                                    <td><input id="standard<?= $standardMilk->id ?>" id="date" type="text" class="form-control" value="<?= $standardMilk->standard ?>"></td>
+                                                    <td><button onclick="standardSaveButton(<?= $standardMilk->id ?>,<?= $standardMilk->itemId ?>);" class="btn btn-sm btn-primary">Simpan</button></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Materials</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                        <thead>
+                                            <tr>
+                                                <th>Standard Material</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $i = 0;
+                                            foreach ($materials as $material) : ?>
+                                                <tr class="gradeX">
+                                                    <td><?= $material->name ?></td>
+                                                    <td><button onclick="location.href = '<?= base_url() ?>standard/edit_material?materialId=<?= $material->id ?>';" class="btn btn-sm btn-primary">Edit</button></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -90,6 +124,16 @@
         <script src="<?= base_url() ?>assets/js/plugins/dataTables/datatables.min.js"></script>
 
         <script>
+            function standardSaveButton(outletId, itemId) {
+                var id = '#standard' + outletId;
+                var standard = $(id).val();
+
+                if (standard) {
+                    window.location = '<?= base_url() ?>standard/add?outletId=' + outletId + '&itemId=' + itemId + '&value=' + standard;
+                }
+            }
+
+
             $(document).ready(function() {
                 $('.dataTables-example').DataTable({
                     pageLength: 5,
@@ -158,4 +202,3 @@
             return "Rp." . number_format($value, 0, ".", ".");
         }
         ?>
-

@@ -12,7 +12,12 @@ class Dashboard extends CI_Controller{
 
     public function index()
     {
-        $date = date("Y-m-d");
+        $tgl = $this->input->get("tanggal");
+        if($tgl != NULL){
+            $date = $tgl;
+        }else{
+            $date = date("Y-m-d");
+        }
 
         $data['overview'] = $this->model->getOverview($date);
         $data['products'] = $this->model->getSellingData($date);
@@ -37,14 +42,16 @@ class Dashboard extends CI_Controller{
         $total = $this->input->get('total');
         $this->inventoryModel->insertInventoryExpense($date,$name,$total);
 
-        redirect('dashboard');
+        redirect('dashboard?tanggal=' . $date);
     }
 
     public function delete_inventory()
     {
+        $date = $this->input->get('date');
         $id = $this->input->get('id');
         $this->inventoryModel->deleteInventoryExpense($id);
-        redirect('dashboard');
+        
+        redirect('dashboard?tanggal=' . $date);
     }
 
 }

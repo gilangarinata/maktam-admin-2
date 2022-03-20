@@ -50,9 +50,9 @@
                                 </div>
                             </div>
                             <?php
-                                $totalInventoryExpense = array_reduce($inventory_expense, function ($carry, $item) {
-                                    return $carry + $item["total"];
-                                });
+                            $totalInventoryExpense = array_reduce($inventory_expense, function ($carry, $item) {
+                                return $carry + $item["total"];
+                            });
                             ?>
                             <div class="ibox-content">
 
@@ -78,10 +78,6 @@
                                             <td>Saldo</td>
                                             <td><?= toRupiah($overview->balance) ?></td>
                                         </tr>
-                                        <tr>
-                                            <td>Omset</td>
-                                            <td><?= toRupiah(($overview->totalFund + $overview->totalIncome - $overview->totalExpense) - $totalInventoryExpense) ?></td>
-                                        </tr>
                                     </tbody>
                                 </table>
 
@@ -102,15 +98,16 @@
                                 <table class="table">
                                     <tbody>
                                         <?php $i = 0;
-                                            foreach ($inventory_expense as $inv) : 
-                                                $id = $inv["id"];
-                                            ?>
-                                                <tr class="gradeX">
-                                                    <td><?= $inv["name"] ?></td>
-                                                    <td><?= $inv["total"] ?></td>
-                                                    <td><button onclick="location.href = '<?= base_url() ?>dashboard/delete_inventory?id=<?= $id ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td></td>
-                                                </tr>
-                                            <?php endforeach; ?>
+                                        foreach ($inventory_expense as $inv) :
+                                            $id = $inv["id"];
+                                        ?>
+                                            <tr class="gradeX">
+                                                <td><?= $inv["name"] ?></td>
+                                                <td><?= $inv["total"] ?></td>
+                                                <td><button onclick="location.href = '<?= base_url() ?>dashboard/delete_inventory?id=<?= $id ?>&date=<?= $overview->date ?>';" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button></td>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                         <tr>
                                             <td><input id="keterangan" id="date" placeholder="Keterangan" type="text" class="form-control" value=""></td>
                                             <td><input id="total" id="date" placeholder="Jumlah" type="text" class="form-control" value=""></td>
@@ -119,11 +116,28 @@
                                     </tbody>
                                 </table>
 
-                                <button onclick="inventorySaveButton('<?= $overview->date ?>');"  class="btn btn-sm btn-primary">Simpan</button>
+                                <button onclick="inventorySaveButton('<?= $overview->date ?>');" class="btn btn-sm btn-primary">Simpan</button>
+                            </div>
+
+                        </div>
+
+                        <div class="ibox float-e-margins">
+
+                            <div class="ibox-content">
+
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Omset</td>
+                                            <td><?= toRupiah(($overview->totalFund + $overview->totalIncome - $overview->totalExpense) - $totalInventoryExpense) ?></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
                             </div>
+
                         </div>
-                        
+
                     </div>
                     <div class="col-lg-6">
                         <div class="ibox float-e-margins">
@@ -186,13 +200,12 @@
         <script src="<?= base_url() ?>assets/js/plugins/dataTables/datatables.min.js"></script>
 
         <script>
-
-            function inventorySaveButton(tanggal){
+            function inventorySaveButton(tanggal) {
                 var name = $('#keterangan').val();
                 var total = $('#total').val();
 
-                if(name){
-                    window.location = '<?= base_url() ?>dashboard/add_inventory?date=' + tanggal + '&name='+ name + '&total=' + total;
+                if (name) {
+                    window.location = '<?= base_url() ?>dashboard/add_inventory?date=' + tanggal + '&name=' + name + '&total=' + total;
                 }
             }
 
@@ -240,18 +253,18 @@
 
 
                 $('#data_1 .input-group.date').datepicker({
-                            todayBtn: "linked",
-                            keyboardNavigation: false,
-                            forceParse: false,
-                            calendarWeeks: true,
-                            autoclose: true,
-                            dateFormat: "dd-mm-yyyy",
+                        todayBtn: "linked",
+                        keyboardNavigation: false,
+                        forceParse: false,
+                        calendarWeeks: true,
+                        autoclose: true,
+                        dateFormat: "dd-mm-yyyy",
 
-                        })
-                        .on("changeDate", function(e) {
+                    })
+                    .on("changeDate", function(e) {
 
-                        })
-                        .datepicker("setDate", new Date());
+                    })
+                    .datepicker("setDate", new Date());
 
 
             })

@@ -39,7 +39,7 @@ class InventoryModel extends CI_Model
         $result = json_decode(curl_exec($curl));
         curl_close($curl);
 
-        // $this->vardump($result);
+        // $this->vardump($result);die;
 
 
         $materials = $this->getAllMaterials();
@@ -47,7 +47,7 @@ class InventoryModel extends CI_Model
         foreach ($materials as $material) {
             $inventoryData = NULL;
             if($result->success == true){
-                foreach($result->inventory as $inventory){
+                foreach((array) $result->inventory as $inventory){
                     if($material->id == $inventory->materialId){
                         $inventoryData = $inventory;
                     }
