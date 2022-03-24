@@ -46,7 +46,6 @@
                                             <tr>
                                                 <th>Nama</th>
                                                 <th>Standard</th>
-                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -55,12 +54,14 @@
                                                 <tr class="gradeX">
                                                     <td><?= $standardMaterial->name ?></td>
                                                     <td><input id="standard<?= $standardMaterial->id ?>" id="date" type="text" class="form-control" value="<?= $standardMaterial->standard ?>"></td>
-                                                    <td><button onclick="standardSaveButton(<?= $standardMaterial->id ?>,<?= $standardMaterial->materialId ?>);" class="btn btn-sm btn-primary">Simpan</button></td>
+
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
 
                                     </table>
+
+                                    <button onclick="standardSaveButton();" class="btn btn-sm btn-primary">Simpan</button>
                                 </div>
                             </div>
                         </div>
@@ -89,19 +90,47 @@
         <script src="<?= base_url() ?>assets/js/plugins/dataTables/datatables.min.js"></script>
 
         <script>
-            function standardSaveButton(outletId, itemId) {
-                var id = '#standard' + outletId;
-                var standard = $(id).val();
-
-                if (standard) {
-                    window.location = '<?= base_url() ?>standard/add_material?outletId=' + outletId + '&itemId=' + itemId + '&value=' + standard;
+            function addData(outletId, itemId, standard) {
+                var data = {
+                    "outletId": outletId,
+                    "itemId": itemId,
+                    "standard": standard
                 }
+                $.ajax({
+                    type: "POST",
+                    url: "http://api.susumaktam.com/api/v1/admin/master-data/standard",
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    crossDomain: true,
+                    dataType: "json",
+                    success: function(data, status, jqXHR) {
+                        console.log(data);
+                    },
+
+                    error: function(jqXHR, status) {
+                        // error handler
+                        console.log(jqXHR);
+                    }
+                });
+            }
+
+
+            function standardSaveButton() {
+                var standardsPhp = '<?php echo json_encode($standardMaterials); ?>';
+                var standards = JSON.parse(standardsPhp);
+                standards.forEach(element => {
+                    var id = '#standard' + element.id;
+                    var standard = $(id).val();
+                    if(standard != element.standard){
+                        addData(element.id, element.materialId, standard)
+                    }
+                });
             }
 
 
             $(document).ready(function() {
                 $('.dataTables-example').DataTable({
-                    pageLength: 5,
+                    pageLength: 50,
                     responsive: true,
                     dom: '<"html5buttons"B>lTfgitp',
                     buttons: [{
